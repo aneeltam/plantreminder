@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 const HomeScreen = () => {
   return (
+  <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
@@ -16,7 +17,6 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      {/* Box Container with Smaller Boxes */}
       <View style={styles.boxContainer}>
         <TouchableOpacity style={styles.box}>
           <Image
@@ -57,6 +57,7 @@ const HomeScreen = () => {
         </View>
       </View>
     </View>
+  </ScrollView>
   );
 };
 
@@ -155,7 +156,6 @@ const styles = StyleSheet.create({
   superWideImage: {
     width: '100%',
     height: '100%',
-    borderRadius: 8,
   },
   superWideBoxOverlay: {
     position: 'absolute',
@@ -174,6 +174,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  scrollContainer: {
+    paddingVertical: 16,
+  },  
 });
 
 export default HomeScreen;

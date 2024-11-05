@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, Pressable, ScrollView } from 'react-native';
 
 const PlantsScreen = ({ favorites, setFavorites }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -46,6 +46,7 @@ const PlantsScreen = ({ favorites, setFavorites }) => {
   };
 
   return (
+  <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       <Text style={styles.title}>Choose a Plant</Text>
       <View style={styles.imageContainer}>
@@ -89,6 +90,7 @@ const PlantsScreen = ({ favorites, setFavorites }) => {
         </View>
       </Modal>
     </View>
+  </ScrollView>
   );
 };
 
@@ -153,6 +155,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  scrollContainer: {
+    paddingVertical: 16,
+    alignItems: 'center',
+  },  
 });
 
 export default PlantsScreen;
