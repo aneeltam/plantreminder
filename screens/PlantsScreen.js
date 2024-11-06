@@ -49,6 +49,7 @@ const PlantsScreen = ({ favorites, setFavorites }) => {
   <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       <Text style={styles.title}>Choose a Plant</Text>
+      <Text style={styles.subtitle}>Click on a plant and add it to your schedule.</Text>
       <View style={styles.imageContainer}>
         {plantsData.map((plant) => (
           <TouchableOpacity key={plant.id} onPress={() => openModal(plant)}>
@@ -80,7 +81,7 @@ const PlantsScreen = ({ favorites, setFavorites }) => {
                 style={styles.favoriteButton}
                 onPress={() => addToFavorites(selectedPlant)}
               >
-                <Text style={styles.favoriteText}>Add to Favorites</Text>
+                <Text style={styles.favoriteText}>Add to Schedule</Text>
               </Pressable>
             </>
           )}
@@ -97,8 +98,6 @@ const PlantsScreen = ({ favorites, setFavorites }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     backgroundColor: '#f5f5f5',
     padding: 16,
   },
@@ -106,7 +105,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-  },
+    textAlign: 'center',
+   },
+  subtitle: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'center',
+    marginBottom: 16,
+  },  
   imageContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

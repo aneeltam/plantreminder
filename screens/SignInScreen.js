@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, Keyboard } from 'react-native';
 
 const SignInScreen = ({ onSignIn, navigation }) => {
   const [email, setEmail] = useState('');
@@ -8,13 +8,14 @@ const SignInScreen = ({ onSignIn, navigation }) => {
   const handleSignIn = () => {
     console.log('Email:', email);
     console.log('Password:', password);
-    onSignIn();
+    onSignIn(); // Ensure this is linked to the function being passed
   };
 
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/logo.webp')} style={styles.logo} />
       <Text style={styles.title}>Sign In</Text>
+      
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -22,6 +23,7 @@ const SignInScreen = ({ onSignIn, navigation }) => {
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
+        editable // This ensures the field can be edited
       />
       <TextInput
         style={styles.input}
@@ -29,8 +31,10 @@ const SignInScreen = ({ onSignIn, navigation }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        editable // Ensures keyboard appears on tap
       />
-      <TouchableOpacity onPress={onSignIn} style={styles.signInButton}>
+      
+      <TouchableOpacity onPress={handleSignIn} style={styles.signInButton}>
         <Text style={styles.signInButtonText}>Sign In</Text>
       </TouchableOpacity>
 
@@ -51,7 +55,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    marginBottom: 20,
     alignSelf: 'center',
     marginTop: -100,
     marginBottom: '30%',

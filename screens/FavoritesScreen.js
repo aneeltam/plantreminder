@@ -32,7 +32,7 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
 
   const getInitialTime = (plantId) => {
     const countdownDays = extendedIds.includes(plantId) ? EXTENDED_COUNTDOWN_DAYS : DEFAULT_COUNTDOWN_DAYS;
-    return countdownDays * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+    return countdownDays * 24 * 60 * 60 * 1000;
   };
 
   const handleUnfavorite = (plantId) => {
@@ -118,6 +118,9 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>My watering schedule</Text>
+      <Text style={styles.subtitle}>
+    Add plants to your schedule from the Plants page. Then reset the countdown to start.
+  </Text>
       {favoritePlantsData
         .filter((plant) => favorites.has(plant.id))
         .map((plant) => {
@@ -173,6 +176,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: 'center',
   },
+  subtitle: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'center',
+    marginBottom: 16,
+  },  
   favoriteItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
