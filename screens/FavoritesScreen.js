@@ -5,6 +5,10 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
   const [timers, setTimers] = useState(new Map());
   const [paused, setPaused] = useState(new Map());
 
+  const DEFAULT_COUNTDOWN_DAYS = 7;
+  const EXTENDED_COUNTDOWN_DAYS = 14;
+  const extendedIds = [8, 9, 10, 13];
+
   const favoritePlantsData = [
     { id: 1, source: require('../assets/images/plant1.webp'), name: 'Monstera Plant' },
     { id: 2, source: require('../assets/images/plant2.webp'), name: 'Fiddle Leaf Fig' },
@@ -26,7 +30,10 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
     { id: 18, source: require('../assets/images/plant18.webp'), name: 'Ficus Ruby' },
   ];
 
-  const countdownDays = 7;
+  const getInitialTime = (plantId) => {
+    const countdownDays = extendedIds.includes(plantId) ? EXTENDED_COUNTDOWN_DAYS : DEFAULT_COUNTDOWN_DAYS;
+    return countdownDays * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+  };
 
   const handleUnfavorite = (plantId) => {
     setFavorites((prevFavorites) => {
@@ -82,8 +89,7 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
   }, [favorites, paused]);
 
   const resetTimer = (plantId) => {
-    const currentTime = Date.now();
-    const newRemainingTime = countdownDays * 24 * 60 * 60 * 1000;
+    const newRemainingTime = getInitialTime(plantId);
     setTimers((prevTimers) => {
       const newTimers = new Map(prevTimers);
       newTimers.set(plantId, newRemainingTime);
@@ -96,7 +102,7 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
     });
     setFavorites((prevFavorites) => {
       const newFavorites = new Map(prevFavorites);
-      newFavorites.set(plantId, { addedAt: currentTime });
+      newFavorites.set(plantId, { addedAt: Date.now() });
       return newFavorites;
     });
   };
@@ -126,7 +132,6 @@ const FavoritesScreen = ({ favorites, setFavorites }) => {
                 <Text style={styles.plantName}>{plant.name}</Text>
                 <Text style={styles.timerText}>{remainingTime}</Text>
 
-                {/* Timer controls */}
                 <View style={styles.timerControls}>
                   <TouchableOpacity
                     style={styles.timerButton}
